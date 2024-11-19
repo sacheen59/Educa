@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import LoginForm
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
@@ -38,10 +38,16 @@ def user_login(request):
             user = authenticate(request,username = cd['username'],password = cd['password'])
             if user is not None:
                 login(request,user)
-                return HttpResponse('Login successfully')
+                return redirect('manage_course_list')
             else:
                 messages.add_message(request,messages.ERROR,'Please provide correct credentials')
                 return render(request,'accounts/user_login.html',{'form':form})
     return render(request, 'accounts/user_login.html',{
         'form':LoginForm
     })
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+
