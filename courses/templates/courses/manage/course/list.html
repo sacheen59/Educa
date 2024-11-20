@@ -10,9 +10,10 @@ educa || My-courses
     {% for course in object_list %}
     <div class="card my-2" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{course.title}}</h5>
-          <a href="{% url 'course_edit' course.id %}" class="card-link btn btn-primary">Edit</a>
-          <a href="{% url 'course_delete' course.id %}" class="card-link btn btn-danger">Delete</a>
+          <h5 class="card-title mb-4">{{course.title}}</h5>
+          <a href="{% url 'course_edit' course.id %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'course_delete' course.id %}" class="btn btn-danger">Delete</a>
+          <a href="{% url 'course_module_update' course.id %}" class="btn btn-primary">Edit modules</a>
         </div>
       </div>
     {% empty %}
