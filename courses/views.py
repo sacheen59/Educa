@@ -12,12 +12,15 @@ class OwnerMixin:
     
 class OwnerEditMixin:
     def form_valid(self,form):
-        form.instance.owner = self.request.user
+        if not hasattr(form,'instance'):
+            form.instance = Course(owner = self.request.user)
+        else:
+            form.instance.owner = self.request.user
         return super().form_valid(form)
-    
+
 class OwnerCourseMixin(OwnerMixin,LoginRequiredMixin,PermissionRequiredMixin):
     model = Course
-    fields = ['subject','title','slug','overview']
+    fields = ['subject','title','overview']
     success_url = reverse_lazy('manage_course_list')
 
 class OwnerCourseEditMixin(OwnerCourseMixin,OwnerEditMixin):

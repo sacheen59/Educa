@@ -4,22 +4,22 @@
 educa || My-courses
 {% endblock %}
 
-{% block content %}
+{% block main_content %}
 <div class="container">
-    <h1>My Courses</h1>
+    <h1 class="my-3 text-muted fw-bold">My Courses</h1>
     {% for course in object_list %}
-    <div>
-        <h3>{{course.title}}</h3>
-        <div>
-            <a href="{% url 'course_edit' course.id %}">Edit</a>
-            <a href="{% url 'course_delete' course.id %}">Delete</a>
+    <div class="card my-2" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{course.title}}</h5>
+          <a href="{% url 'course_edit' course.id %}" class="card-link btn btn-primary">Edit</a>
+          <a href="{% url 'course_delete' course.id %}" class="card-link btn btn-danger">Delete</a>
         </div>
-    </div>
+      </div>
     {% empty %}
-    <p>You haven't created any courses yet.</p>
+    <p class="p-5 shadow-sm fs-2 fw-bold text-danger d-inline-block bordered">You haven't created any courses yet.</p>
     {% endfor %}
     <div>
-        <a href="{% url 'course_created' %}" class="">Create New Courses</a>
+        <a href="{% url 'course_create' %}" class="btn btn-success">Create New Courses</a>
     </div>
 </div>
 
